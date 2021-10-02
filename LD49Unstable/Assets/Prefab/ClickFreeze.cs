@@ -8,6 +8,7 @@ public class ClickFreeze : MonoBehaviour
     public bool floating = true;
     public bool frozen = false;
     public GameObject listener;
+    public int timeTillFall = 5;
     
     
     // Start is called before the first frame update
@@ -38,7 +39,15 @@ public class ClickFreeze : MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
+        StartCoroutine(falling());
+        
+       
+    }
+    IEnumerator falling()
+    {
+        yield return new WaitForSeconds(timeTillFall);
         floating = false;
+        platform.GetComponent<Rigidbody2D>().WakeUp();
     }
     void OnMouseDown()
     {
@@ -46,11 +55,13 @@ public class ClickFreeze : MonoBehaviour
         if(frozen)
         {
             frozen = false;
+            listener.GetComponent<ClickListener>().AddCharge();
+            platform.GetComponent<Rigidbody2D>().WakeUp();
         }
-        else if(listener.GetComponent<ClickListener>().getCharge() > 0)
+        else if(listener.GetComponent<ClickListener>().GetCharge() > 0)
         {
             frozen = true;
-            listener.GetComponent<ClickListener>().useCharge();
+            listener.GetComponent<ClickListener>().UseCharge();
         }
         
        

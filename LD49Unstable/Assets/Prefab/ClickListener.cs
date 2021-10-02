@@ -16,16 +16,20 @@ public class ClickListener : MonoBehaviour
     {
         
     }
-    public int getCharge()
+    public int GetCharge()
     {
         return charge;
     }
-    void setCharge(int amount)
+    void SetCharge(int amount)
     {
         charge = amount;
     }
-    public void useCharge()
+    public void UseCharge()
     {
-        setCharge(charge - 1);
+        SetCharge(charge - 1);
+    }
+    public void AddCharge()
+    {
+        SetCharge(charge + 1);
     }
 }
