@@ -7,7 +7,6 @@ public class ClickFreeze : MonoBehaviour
     public GameObject platform;
     public bool floating = true;
     public bool frozen = false;
-    public GameObject listener;
     public int timeTillFall = 5;
     
     
@@ -55,13 +54,13 @@ public class ClickFreeze : MonoBehaviour
         if(frozen)
         {
             frozen = false;
-            listener.GetComponent<ClickListener>().AddCharge();
+            GameState.AddCharge();
             platform.GetComponent<Rigidbody2D>().WakeUp();
         }
-        else if(listener.GetComponent<ClickListener>().GetCharge() > 0)
+        else if(GameState.GetCharge() > 0)
         {
             frozen = true;
-            listener.GetComponent<ClickListener>().UseCharge();
+            GameState.UseCharge();
         }
         
        
