@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class PlaceholderChar : MonoBehaviour
 {
-    public float maxSpeed = 2f;
+    public float maxSpeed = 8f;
     public LayerMask whatIsGround;
     private CircleCollider2D groundCheck;
     public bool grounded = true;
-    public float JumpForce = 400f;
+    public float JumpForce = 600F;
+    private bool facingRight = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +21,16 @@ public class PlaceholderChar : MonoBehaviour
     void Update()
     {
         float move = Input.GetAxis("Horizontal");
+        if (move > 0 && !facingRight)
+        {
+            Flip();
+        }
+        else if (move < 0 && facingRight)
+        {
+            Flip();
+        }        
         GetComponent<Rigidbody2D>().velocity = new Vector2(move * maxSpeed, GetComponent<Rigidbody2D>().velocity.y);
+
 
         grounded = groundCheck.IsTouchingLayers (whatIsGround);
 
@@ -31,4 +41,13 @@ public class PlaceholderChar : MonoBehaviour
         }
 
     }
+
+    void Flip()
+    {
+        //Debug.Log("switching...");
+        facingRight = !facingRight;
+        Vector3 theScale = transform.localScale;
+        theScale.x *= -1;
+        transform.localScale = theScale;
+    }    
 }
