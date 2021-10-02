@@ -5,37 +5,52 @@ using UnityEngine;
 public class ClickFreeze : MonoBehaviour
 {
     public GameObject platform;
-    public bool isAsleep = true;
-    public bool forceSleep = false;
+    public bool floating = true;
+    public bool frozen = false;
     public int charge = 3;
     
     // Start is called before the first frame update
     void Start()
     {
-        
+        platform.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
     // Update is called once per frame
+    
     void Update()
     {
-        
-    }
-    void FixedUpdate()
-    {
-       if(forceSleep)
+       if(frozen)
         {
-            platform.GetComponent<Rigidbody2D>().Sleep();
+            platform.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
             Debug.Log("ZZZ");
         }
+       else if(floating)
+        {
+            platform.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+            Debug.Log(platform.name);
+        }
+       else
+        {
+            platform.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+        }
+    }
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        floating = false;
     }
     void OnMouseDown()
     {
         Debug.Log("hi");
-        if(charge > 0)
+        if(frozen)
         {
-            forceSleep = true;
+            frozen = false;
+        }
+        else
+        {
+            frozen = true;
             charge--;
         }
+        
        
         
     }
