@@ -7,7 +7,8 @@ public class ClickFreeze : MonoBehaviour
     public GameObject platform;
     public bool floating = true;
     public bool frozen = false;
-    public int charge = 3;
+    public GameObject listener;
+    
     
     // Start is called before the first frame update
     void Start()
@@ -45,10 +46,10 @@ public class ClickFreeze : MonoBehaviour
         {
             frozen = false;
         }
-        else
+        else if(listener.GetComponent<ClickListener>().getCharge() > 0)
         {
             frozen = true;
-            charge--;
+            listener.GetComponent<ClickListener>().useCharge();
         }
         
        
