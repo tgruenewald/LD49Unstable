@@ -16,7 +16,7 @@ public class ClickFreeze : MonoBehaviour
     void Start()
     {
         platform = gameObject;
-        platform.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+        platform.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
     }
 
     // Update is called once per frame
@@ -36,7 +36,22 @@ public class ClickFreeze : MonoBehaviour
         {
             platform.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
         }
+       if(platform.GetComponentInChildren<Clickable>().clickOn)
+        {
+            frozen = true;
+            GameState.UseCharge();
+            platform.GetComponentInParent<SpriteRenderer>().sprite = sprite2;
+        }
+       else
+        {
+            frozen = false;
+            GameState.AddCharge();
+            platform.GetComponentInParent<SpriteRenderer>().sprite = sprite1;
+        }
+       
+       
     }
+ 
     void OnCollisionEnter2D(Collision2D collision)
     {
         StartCoroutine(falling());
@@ -49,24 +64,27 @@ public class ClickFreeze : MonoBehaviour
         floating = false;
         platform.GetComponent<Rigidbody2D>().WakeUp();
     }
+    /*
     void OnMouseDown()
     {
-        //Debug.Log("hi");
+        Debug.Log("hi");
         if(frozen)
         {
             frozen = false;
             GameState.AddCharge();
-            platform.GetComponent<Rigidbody2D>().WakeUp();
-            platform.GetComponent<SpriteRenderer>().sprite = sprite1;
+            platform.GetComponentInParent<Rigidbody2D>().WakeUp();
+            platform.GetComponentInParent<SpriteRenderer>().sprite = sprite1;
         }
         else if(GameState.GetCharge() > 0)
         {
             frozen = true;
             GameState.UseCharge();
-            platform.GetComponent<SpriteRenderer>().sprite = sprite2;
+            platform.GetComponentInParent<SpriteRenderer>().sprite = sprite2;
         }
         
        
         
     }
+    */
+  
 }
