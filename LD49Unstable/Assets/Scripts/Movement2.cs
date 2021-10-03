@@ -43,24 +43,34 @@ public class Movement2 : MonoBehaviour
         {
             Debug.Log("Fired and hit a wall");
         }*/
+        if (grounded) 
+        {
+            Debug.Log("grounded");
+            animator.SetBool("isJumping", false);
+        }
 
         //rb.AddForce(jumpUp);
-        if (lastXPosition != transform.position.x)
+        if (lastXPosition != transform.position.x && grounded)
         {
             animator.SetBool("isWalking", true);
         }
-        else
+        else 
         {
-            animator.SetBool("isWalking", false);
+            if (grounded) 
+            {
+                Debug.Log("Returning to idle");
+                animator.SetBool("isWalking", false);
+            }
+            
         }
         lastXPosition = transform.position.x;
 
         float move = Input.GetAxis("Horizontal");
-        if (move > 0 && !facingRight)
+        if (move > 0 && !facingRight && grounded)
         {
             Flip();
         }
-        else if (move < 0 && facingRight)
+        else if (move < 0 && facingRight && grounded)
         {
             Flip();
         }         
@@ -87,20 +97,25 @@ public class Movement2 : MonoBehaviour
         }
         if (Input.GetKey("w") && x == 0)
         {
-            
+            Debug.Log("Jumping");
+            animator.SetBool("isJumping", true);        
+            animator.SetBool("isWalking", false);    
             if (grounded && !Input.GetKey(KeyCode.Space))
             {
                 rb.AddForce(new Vector2(0f, jumpForce));
-
-                //transform.position += new Vector3(0, tempSpeed * Time.deltaTime, 0);
 
                 x = 1;
             }
         }
 
+                            
+
         /*Dash Initialize:*/
         if (Input.GetKey(KeyCode.Space) && (dashMode == 0) && (!grounded))
         {//Which way is it facing:
+            Debug.Log("Jumping");
+            animator.SetBool("isJumping", true);    
+            animator.SetBool("isWalking", false);        
             if (Input.GetKey("w"))
             {
                 dashMode = 1;
@@ -152,15 +167,7 @@ public class Movement2 : MonoBehaviour
             //Possibly add an else{set to 3 or 7, depending on which way the hero is facing}
         }
 
-        if (!grounded) 
-        {
-            Debug.Log("Jumping");
-            animator.SetBool("isJumping", true);
-        }
-        else 
-        {
-            animator.SetBool("isJumping", false);
-        }        
+
 
         if (x > 0) //x>0 if it's jumping and not grounded
         {
