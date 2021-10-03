@@ -170,6 +170,6 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 7
-  jumpForce: 500
+  jumpForce: 1000
   dashForce: 1.5
   dashTime: 10
