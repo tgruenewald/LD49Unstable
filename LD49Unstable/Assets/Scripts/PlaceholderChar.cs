@@ -19,6 +19,7 @@ public class PlaceholderChar : MonoBehaviour
     private int dashDirection;
     private Rigidbody2D rb;
     bool dashUp = true;
+    Animator animator;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +27,7 @@ public class PlaceholderChar : MonoBehaviour
         Camera.main.GetComponent<SmoothCamera>().target = gameObject;
         dashTime = dashStartTime;
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -46,6 +48,15 @@ public class PlaceholderChar : MonoBehaviour
             rb.velocity = new Vector2(move * maxSpeed, rb.velocity.y);
         }
 
+        if (rb.velocity.x != 0)
+        {
+            animator.SetBool("isWalking", true);
+
+        }
+        else
+        {
+            animator.SetBool("isWalking", false);
+        }
 
         // dash
         // Pressing up arrow will cause a dash in the current direction
@@ -87,11 +98,20 @@ public class PlaceholderChar : MonoBehaviour
             Debug.Log("reset dashup");
 
         }
+        if (!grounded) 
+        {
+            animator.SetBool("isJumping", true);
+        }
+        else 
+        {
+            animator.SetBool("isJumping", false);
+        }
 
         if (grounded && Input.GetButtonDown("Jump"))
         {
             Debug.Log("jumping");
             rb.AddForce(new Vector2(0, JumpForce));
+            
         }
 
         if (rb.transform.position.y < -100f)
