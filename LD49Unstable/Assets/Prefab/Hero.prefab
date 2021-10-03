@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8195271573575202516}
   - component: {fileID: 8141351611429634337}
   - component: {fileID: 977708765624198463}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Hero
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -170,4 +170,6 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 7
-  jumpForce: 500
+  jumpForce: 1000
+  dashForce: 1.5
+  dashTime: 10
