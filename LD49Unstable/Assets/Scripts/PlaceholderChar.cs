@@ -94,6 +94,14 @@ public class PlaceholderChar : MonoBehaviour
             rb.AddForce(new Vector2(0, JumpForce));
         }
 
+        if (rb.transform.position.y < -100f)
+        {
+            // then characther fell
+            Debug.Log("Character fell");
+            GameState.gameOver();
+
+        }
+
     }
 
     void Flip()

@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+
 
 public class Hazard : MonoBehaviour
 {
@@ -20,7 +20,7 @@ public class Hazard : MonoBehaviour
     {
         if(col.gameObject.tag == "Player")
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            GameState.gameOver();
         }
        
     }
