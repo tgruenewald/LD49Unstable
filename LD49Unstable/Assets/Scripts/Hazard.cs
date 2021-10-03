@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class Key : MonoBehaviour
+public class Hazard : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -15,15 +16,12 @@ public class Key : MonoBehaviour
     {
         
     }
-
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.tag == "Player")
+        if(col.gameObject.tag == "Player")
         {
-            Debug.Log(col.gameObject.name + " : " + gameObject.name + " : " + Time.time);
-            GameState.hasKey = true;
-            Destroy(gameObject);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
-
+       
     }
 }

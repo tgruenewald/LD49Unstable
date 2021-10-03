@@ -8,6 +8,8 @@ public class ClickFreeze : MonoBehaviour
     public bool floating = true;
     public bool frozen = false;
     public int timeTillFall = 5;
+    public Sprite sprite1;
+    public Sprite sprite2;
     
     
     // Start is called before the first frame update
@@ -56,11 +58,13 @@ public class ClickFreeze : MonoBehaviour
             frozen = false;
             GameState.AddCharge();
             platform.GetComponent<Rigidbody2D>().WakeUp();
+            platform.GetComponent<SpriteRenderer>().sprite = sprite1;
         }
         else if(GameState.GetCharge() > 0)
         {
             frozen = true;
             GameState.UseCharge();
+            platform.GetComponent<SpriteRenderer>().sprite = sprite2;
         }
         
        
