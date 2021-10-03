@@ -29,7 +29,7 @@ public class PlaceholderChar : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         float move = Input.GetAxis("Horizontal");
         if (move > 0 && !facingRight)
