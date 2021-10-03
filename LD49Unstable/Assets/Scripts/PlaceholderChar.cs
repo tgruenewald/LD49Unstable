@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public class PlaceholderChar : MonoBehaviour
 {
     public float maxSpeed = 8f;
@@ -10,11 +12,20 @@ public class PlaceholderChar : MonoBehaviour
     public bool grounded = true;
     public float JumpForce = 600F;
     private bool facingRight = true;
+    private float dashStartTime = 0.1f;
+    private float dashTime;
+    private bool startDash = false;
+    public float dashForce = 80f;
+    private int dashDirection;
+    private Rigidbody2D rb;
+    bool dashUp = true;
     // Start is called before the first frame update
     void Start()
     {
         groundCheck = GetComponent<CircleCollider2D>();
         Camera.main.GetComponent<SmoothCamera>().target = gameObject;
+        dashTime = dashStartTime;
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -29,15 +40,58 @@ public class PlaceholderChar : MonoBehaviour
         {
             Flip();
         }        
-        GetComponent<Rigidbody2D>().velocity = new Vector2(move * maxSpeed, GetComponent<Rigidbody2D>().velocity.y);
+        
+        if (!startDash) 
+        {
+            rb.velocity = new Vector2(move * maxSpeed, rb.velocity.y);
+        }
+
+
+        // dash
+        // Pressing up arrow will cause a dash in the current direction
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            
+            startDash = true;
+            dashTime = dashStartTime;
+            dashDirection = (int) move;
+            Debug.Log("dash: " + dashDirection);
+
+        }
+        if (startDash)
+        {
+            if (!grounded && dashUp) {
+                rb.AddForce(new Vector2(0, 800f));    
+                Debug.Log("Dashing up");
+                dashUp = false;
+            }
+            if (move != 0) {
+                rb.AddForce(new Vector2(150f*move,  0));
+            }
+            
+            dashTime -= Time.deltaTime;
+            // Debug.Log(dashTime);
+            if (dashTime <= 0)
+            {
+                Debug.Log("Dash done");
+                startDash = false;
+            }
+        }
+
 
 
         grounded = groundCheck.IsTouchingLayers (whatIsGround);
+        if (grounded && !dashUp) {
+            // then reset
+            dashUp = true;
+            Debug.Log("reset dashup");
+
+        }
 
         if (grounded && Input.GetButtonDown("Jump"))
         {
             Debug.Log("jumping");
-            GetComponent<Rigidbody2D>().AddForce(new Vector2(0, JumpForce));
+            rb.AddForce(new Vector2(0, JumpForce));
         }
 
     }
