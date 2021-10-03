@@ -6,6 +6,7 @@ using UnityEngine;
 public class Hazard : MonoBehaviour
 {
     // Start is called before the first frame update
+    bool dying = false;
     void Start()
     {
         
@@ -16,17 +17,24 @@ public class Hazard : MonoBehaviour
     {
         
     }
-    IEnumerator death()
+    IEnumerator death(GameObject go)
     {
+        go.GetComponent<PlaceholderChar>().die();
         yield return new WaitForSeconds(1f);
         GameState.gameOver();
+        dying = false;
     }
     
     void OnTriggerEnter2D(Collider2D col)
     {
         if(col.gameObject.tag == "Player")
-        {
-            StartCoroutine(death());
+        {   
+            if (!dying)
+            {
+                dying = true;
+                StartCoroutine(death(col.gameObject));
+            }
+
         }
        
     }

@@ -124,6 +124,12 @@ public class PlaceholderChar : MonoBehaviour
 
     }
 
+    public void die()
+    {
+        Debug.Log("is dying");
+        animator.SetBool("isDying", true);
+    }
+
     void Flip()
     {
         //Debug.Log("switching...");
