@@ -31,7 +31,6 @@ public class ClickFreeze : MonoBehaviour
        else if(floating)
         {
             platform.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
-            Debug.Log(platform.name);
         }
        else
         {
@@ -52,7 +51,7 @@ public class ClickFreeze : MonoBehaviour
     }
     void OnMouseDown()
     {
-        Debug.Log("hi");
+        //Debug.Log("hi");
         if(frozen)
         {
             frozen = false;
