@@ -39,13 +39,13 @@ public class ClickFreeze : MonoBehaviour
        if(platform.GetComponentInChildren<Clickable>().clickOn)
         {
             frozen = true;
-            GameState.UseCharge();
+            //GameState.UseCharge();
             platform.GetComponentInParent<SpriteRenderer>().sprite = sprite2;
         }
        else
         {
             frozen = false;
-            GameState.AddCharge();
+            //GameState.AddCharge();
             platform.GetComponentInParent<SpriteRenderer>().sprite = sprite1;
         }
        
