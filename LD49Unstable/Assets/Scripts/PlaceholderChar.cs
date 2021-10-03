@@ -100,10 +100,12 @@ public class PlaceholderChar : MonoBehaviour
         }
         if (!grounded) 
         {
+            Debug.Log("Jumping");
             animator.SetBool("isJumping", true);
         }
         else 
         {
+            Debug.Log("not Jumping");
             animator.SetBool("isJumping", false);
         }
 
@@ -122,6 +124,12 @@ public class PlaceholderChar : MonoBehaviour
 
         }
 
+    }
+
+    public void die()
+    {
+        Debug.Log("is dying");
+        animator.SetBool("isDying", true);
     }
 
     void Flip()

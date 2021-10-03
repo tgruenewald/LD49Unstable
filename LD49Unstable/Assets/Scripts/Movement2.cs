@@ -19,6 +19,9 @@ public class Movement2 : MonoBehaviour
     int x = 0;//Jumpcounter;
     int x2 = 0;//Dashcounter;
     int dashMode = 0;//-1 means dashed expended, 0 means dash ready, 1-8 means dashing in one of eight directions
+    Animator animator;
+    private bool facingRight = true;
+    float lastXPosition = 0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +30,7 @@ public class Movement2 : MonoBehaviour
         //rb.isKinematic = true;
 
         Camera.main.GetComponent<SmoothCamera>().target = gameObject;
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -41,6 +45,25 @@ public class Movement2 : MonoBehaviour
         }*/
 
         //rb.AddForce(jumpUp);
+        if (lastXPosition != transform.position.x)
+        {
+            animator.SetBool("isWalking", true);
+        }
+        else
+        {
+            animator.SetBool("isWalking", false);
+        }
+        lastXPosition = transform.position.x;
+
+        float move = Input.GetAxis("Horizontal");
+        if (move > 0 && !facingRight)
+        {
+            Flip();
+        }
+        else if (move < 0 && facingRight)
+        {
+            Flip();
+        }         
         
         float tempSpeed = speed;
         //print(x);
@@ -56,6 +79,7 @@ public class Movement2 : MonoBehaviour
         if (Input.GetKey("d"))
         {
             transform.position += new Vector3(tempSpeed * Time.deltaTime, 0, 0);
+
         }
         if (Input.GetKey("a"))
         {
@@ -63,6 +87,7 @@ public class Movement2 : MonoBehaviour
         }
         if (Input.GetKey("w") && x == 0)
         {
+            
             if (grounded && !Input.GetKey(KeyCode.Space))
             {
                 rb.AddForce(new Vector2(0f, jumpForce));
@@ -127,6 +152,16 @@ public class Movement2 : MonoBehaviour
             //Possibly add an else{set to 3 or 7, depending on which way the hero is facing}
         }
 
+        if (!grounded) 
+        {
+            Debug.Log("Jumping");
+            animator.SetBool("isJumping", true);
+        }
+        else 
+        {
+            animator.SetBool("isJumping", false);
+        }        
+
         if (x > 0) //x>0 if it's jumping and not grounded
         {
             jump();
@@ -137,9 +172,48 @@ public class Movement2 : MonoBehaviour
         }
         if (dashMode > 0)
         {
+            animator.SetBool("isWalking", true);
             dash();
         }
+
+        // Debug.Log("Speed: " + rb.velocity.x);
+
+        // if (rb.velocity.x != 0)
+        // {
+        //     Debug.Log("Walking");
+        //     animator.SetBool("isWalking", true);
+
+        // }
+        // else
+        // {
+        //     animator.SetBool("isWalking", false);
+        // }        
+
+
+        if (rb.transform.position.y < -100f)
+        {
+            // then characther fell
+            Debug.Log("Character fell");
+            GameState.gameOver();
+
+        }        
     }
+
+    public void die()
+    {
+        Debug.Log("is dying");
+        animator.SetBool("isDying", true);
+    }
+
+    void Flip()
+    {
+        //Debug.Log("switching...");
+        facingRight = !facingRight;
+        Vector3 theScale = transform.localScale;
+        theScale.x *= -1;
+        transform.localScale = theScale;
+    }  
+
     void jump()//Called when jump is active, doesn't make jump happen
     {
         if (x < 3)//Can't be regrounded for 3 frames, in case it's not perfectly on top of the platform
