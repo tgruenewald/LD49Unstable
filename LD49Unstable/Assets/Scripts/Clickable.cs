@@ -23,11 +23,13 @@ public class Clickable : MonoBehaviour
         {
             clickOn = true;
             clickOff = false;
+            GameState.UseCharge();
         }
         else if(clickOn)
         {
             clickOff = true;
             clickOn = false;
+            GameState.AddCharge();
         }
     }
 

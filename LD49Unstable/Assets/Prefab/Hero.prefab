@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 3359912149849291388}
   - component: {fileID: 8195271573575202523}
   - component: {fileID: 8195271573575202516}
-  - component: {fileID: 8195271573575202517}
   - component: {fileID: 8141351611429634337}
-  m_Layer: 0
-  m_Name: Character_placeholder
+  - component: {fileID: 977708765624198463}
+  m_Layer: 3
+  m_Name: Hero
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -73,8 +73,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 2074981761
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 47588d14017836d43a733338fb277bd7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -102,11 +102,11 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 3
+  m_GravityScale: 5
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!61 &8195271573575202516
 BoxCollider2D:
@@ -134,24 +134,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.0614212, y: 5.3939323}
   m_EdgeRadius: 0
---- !u!114 &8195271573575202517
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8195271573575202518}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c56ba2754dec3524fa04d3b3c4ee8566, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxSpeed: 13
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 7
-  grounded: 1
-  JumpForce: 600
 --- !u!58 &8141351611429634337
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -165,6 +147,29 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.32, y: -2.59}
+  m_Offset: {x: 0.32, y: -2.85}
   serializedVersion: 2
-  m_Radius: 1.1015975
+  m_Radius: 0.05
+--- !u!114 &977708765624198463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8195271573575202518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abdf9778f96915f43ae0fbd2c2fe5b6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 8195271573575202518}
+  rb: {fileID: 8195271573575202523}
+  speed: 6
+  groundCheck: {fileID: 8141351611429634337}
+  grounded: 1
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 7
+  jumpForce: 500
+  dashForce: 1.5
+  dashTime: 10
