@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public static class GameState 
 {
@@ -13,10 +14,13 @@ public static class GameState
     }
     public static void SetCharge(int amount)
     {
+        GameObject go = GameObject.FindGameObjectsWithTag("freeze")[0];
+        go.GetComponent<Text>().text = "" + amount;
         charge = amount;
     }
     public static void UseCharge()
     {
+
         SetCharge(charge - 1);
     }
     public static void AddCharge()
