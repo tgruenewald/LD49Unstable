@@ -16,11 +16,17 @@ public class Hazard : MonoBehaviour
     {
         
     }
+    IEnumerator death()
+    {
+        yield return new WaitForSeconds(1f);
+        GameState.gameOver();
+    }
+    
     void OnTriggerEnter2D(Collider2D col)
     {
         if(col.gameObject.tag == "Player")
         {
-            GameState.gameOver();
+            StartCoroutine(death());
         }
        
     }
