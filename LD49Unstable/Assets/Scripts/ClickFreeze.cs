@@ -11,6 +11,7 @@ public class ClickFreeze : MonoBehaviour
     public Sprite sprite1;
     public Sprite sprite2;
     Animator animator;
+    bool startShake = false;
     
     
     // Start is called before the first frame update
@@ -41,7 +42,6 @@ public class ClickFreeze : MonoBehaviour
        if(platform.GetComponentInChildren<Clickable>().clickOn)
         {
             frozen = true;
-            animator.SetBool("isShaking", false);
             animator.SetBool("isFrozen", true);
             //GameState.UseCharge();
             // platform.GetComponentInParent<SpriteRenderer>().sprite = sprite2;
@@ -65,6 +65,7 @@ public class ClickFreeze : MonoBehaviour
     }
     IEnumerator falling()
     {
+        startShake = true;
         animator.SetBool("isShaking", true);
         yield return new WaitForSeconds(timeTillFall);
         floating = false;
