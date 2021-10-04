@@ -9,7 +9,6 @@ public class Movement2 : MonoBehaviour
     public Rigidbody2D rb;
     public float speed = 6f;
     public CircleCollider2D groundCheck;
-    public BoxCollider2D headCheck;//
     public bool grounded = true;
     public LayerMask whatIsGround;
     /*public float jumpHeight = 10f;
@@ -259,31 +258,13 @@ public class Movement2 : MonoBehaviour
                 dashForce *= (Time.deltaTime * 50f);
                 if (dashMode % 2 == 1)//Non-diagonals
                 {//1=U,3=R,5=D,7=L
-                    if (dashMode % 4 == 1)
+                    if (dashMode%4==1)
                     {//Up and Down
-                        if (dashMode == 1)
-                        {
-                            for (int i = 0; i < 5; i++)
-                            {
-                                if (!headCheck.IsTouchingLayers(whatIsGround))
-                                {
-                                    transform.position += (new Vector3(0, dashForce * (1 - x2 / dashTime)*.2f, 0));
-                                }
-                                else
-                                {
-                                    x2 = 0;
-                                    dashMode = -1;
-                                }
-                            }
-                        }
-                        else
-                        {
-                            transform.position += (new Vector3(0, dashForce * (1 - x2 / dashTime), 0)) * ((dashMode / 4) * (-2) + 1);
-                        }
+                        transform.position += (new Vector3(0, dashForce*(1-x2/dashTime),0)) * ((dashMode / 4) * (-2) + 1);
                     }
                     else
                     {//Right and Left
-                        transform.position += (new Vector3(dashForce * (1 - x2 / dashTime), 0, 0)) * ((dashMode / 4) * (-2) + 1);
+                        transform.position += (new Vector3(dashForce*(1-x2/dashTime), 0, 0)) * ((dashMode / 4) * (-2) + 1);
                     }
                 }
                 else//Are-diagonals
@@ -291,27 +272,7 @@ public class Movement2 : MonoBehaviour
                     transform.position += (new Vector3(.707f * dashForce * (1 - x2 / dashTime), 0, 0)) * ((dashMode / 5) * (-2) + 1);//L/R
                     if (dashMode==8 || dashMode==2)
                     {
-
-                        for (int i = 0; i < 5; i++)
-                        {
-                            if (!headCheck.IsTouchingLayers(whatIsGround))
-                            {
-                                transform.position += (new Vector3(0, .707f * dashForce * (1 - x2 / dashTime)*.2f, 0));//U
-                            }
-                            else
-                            {
-                                //x2 = 0;
-                                if (dashMode == 2)
-                                {
-                                    dashMode = 3;
-                                }
-                                else
-                                {
-                                    dashMode = 7;
-                                }
-                            }
-                        }
-                        
+                        transform.position += (new Vector3(0, .707f * dashForce * (1 - x2 / dashTime), 0));//U
                     }
                     else
                     {
