@@ -17,6 +17,7 @@ public class ClickFreeze : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameState.SetCharge(3);
         platform = gameObject;
         platform.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
         animator = GetComponent<Animator>();
