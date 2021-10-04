@@ -167,6 +167,7 @@ MonoBehaviour:
   rb: {fileID: 8195271573575202523}
   speed: 6
   groundCheck: {fileID: 8141351611429634337}
+  headCheck: {fileID: 8195271573575202516}
   grounded: 1
   whatIsGround:
     serializedVersion: 2
