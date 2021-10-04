@@ -174,10 +174,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 977708765624198463, guid: 2f099407adc074c478801abbdbd6828a, type: 3}
-      propertyPath: headCheck
-      value: 
-      objectReference: {fileID: 613434767}
     - target: {fileID: 8195271573575202518, guid: 2f099407adc074c478801abbdbd6828a, type: 3}
       propertyPath: m_Name
       value: Hero
@@ -245,11 +241,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3f034fc028e73a47a7239c552ab1f0f, type: 3}
---- !u!61 &613434767 stripped
-BoxCollider2D:
-  m_CorrespondingSourceObject: {fileID: 8195271573575202516, guid: 2f099407adc074c478801abbdbd6828a, type: 3}
-  m_PrefabInstance: {fileID: 28723358}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &704236412
 PrefabInstance:
   m_ObjectHideFlags: 0
