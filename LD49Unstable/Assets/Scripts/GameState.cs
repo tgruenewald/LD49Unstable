@@ -8,6 +8,7 @@ public static class GameState
 {
     public static bool hasKey = false;
     public static int charge = 3;
+    public static int tutorialStage = 0;
 
     public static int GetCharge()
     {
@@ -35,4 +36,5 @@ public static class GameState
         hasKey = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+    
 }

@@ -19,11 +19,13 @@ public class Clickable : MonoBehaviour
     }
     void OnMouseDown()
     {
-        if(clickOff)
+        Debug.Log("Click");
+        if(clickOff && GameState.GetCharge()>0)
         {
             clickOn = true;
             clickOff = false;
             GameState.UseCharge();
+
         }
         else if(clickOn)
         {
@@ -32,5 +34,6 @@ public class Clickable : MonoBehaviour
             GameState.AddCharge();
         }
     }
+
 
 }
