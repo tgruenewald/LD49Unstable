@@ -20,7 +20,7 @@ public class Clickable : MonoBehaviour
     void OnMouseDown()
     {
         Debug.Log("Click");
-        if(clickOff)
+        if(clickOff && GameState.GetCharge()>0)
         {
             clickOn = true;
             clickOff = false;
