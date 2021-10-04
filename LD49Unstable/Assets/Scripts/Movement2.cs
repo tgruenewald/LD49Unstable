@@ -36,6 +36,7 @@ public class Movement2 : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        //print(""+Time.deltaTime);
         grounded = groundCheck.IsTouchingLayers(whatIsGround);
         /*Code to maybe make the 'grounded' thing work better:
         LayerMask mask = LayerMask.GetMask("platform");
@@ -89,7 +90,6 @@ public class Movement2 : MonoBehaviour
         if (Input.GetKey("d"))
         {
             transform.position += new Vector3(tempSpeed * Time.deltaTime, 0, 0);
-
         }
         if (Input.GetKey("a"))
         {
@@ -123,7 +123,7 @@ public class Movement2 : MonoBehaviour
                 {
                     dashMode = 8;
                 }
-                if (Input.GetKey("d"))
+                else if (Input.GetKey("d"))
                 {
                     dashMode += 1;
                 }
@@ -135,7 +135,7 @@ public class Movement2 : MonoBehaviour
                 {
                     dashMode -= 1;
                 }
-                if (Input.GetKey("a"))
+                else if (Input.GetKey("a"))
                 {
                     dashMode += 1;
                 }
@@ -147,7 +147,7 @@ public class Movement2 : MonoBehaviour
                 {
                     dashMode -= 1;
                 }
-                if (Input.GetKey("w"))
+                else if (Input.GetKey("w"))
                 {
                     dashMode += 1;
                 }
@@ -159,7 +159,7 @@ public class Movement2 : MonoBehaviour
                 {
                     dashMode -= 1;
                 }
-                if (Input.GetKey("s"))
+                else if (Input.GetKey("s"))
                 {
                     dashMode += 1;
                 }
@@ -255,6 +255,7 @@ public class Movement2 : MonoBehaviour
             }
             else
             {//Dash!
+                dashForce *= (Time.deltaTime * 50f);
                 if (dashMode % 2 == 1)//Non-diagonals
                 {//1=U,3=R,5=D,7=L
                     if (dashMode%4==1)
@@ -278,6 +279,7 @@ public class Movement2 : MonoBehaviour
                         transform.position -= (new Vector3(0, .707f * dashForce * (1 - x2 / dashTime), 0));//D
                     }
                 }
+                dashForce /= (Time.deltaTime * 50f);
             }
         }
     }

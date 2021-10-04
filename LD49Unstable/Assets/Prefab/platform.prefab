@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: 6388869787769411210}
   - component: {fileID: 9114602203567974914}
   - component: {fileID: 452935097}
+  - component: {fileID: -6176936495649016889}
   m_Layer: 0
   m_Name: platform
   m_TagString: Untagged
@@ -184,7 +185,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.1318183, y: 1.0214372}
+  m_Offset: {x: 0.1318183, y: 0.34034383}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -195,7 +196,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 8.570668, y: 0.2998404}
+  m_Size: {x: 8.570668, y: 1.6620271}
   m_EdgeRadius: 0
 --- !u!50 &9114602203567974914
 Rigidbody2D:
@@ -212,7 +213,7 @@ Rigidbody2D:
   m_Mass: 0.56891704
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0.05
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 0
@@ -236,3 +237,22 @@ MonoBehaviour:
   timeTillFall: 5
   sprite1: {fileID: 21300000, guid: f4c954a8ef9494649ba650824bd69e3e, type: 3}
   sprite2: {fileID: 21300000, guid: 0323f3c66dd56134594f64a21cc2a766, type: 3}
+--- !u!95 &-6176936495649016889
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6388869787769411211}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 25887da86a5619d4a95ab917e187dd61, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

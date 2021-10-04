@@ -10,6 +10,8 @@ public class ClickFreeze : MonoBehaviour
     public int timeTillFall = 5;
     public Sprite sprite1;
     public Sprite sprite2;
+    Animator animator;
+    bool startShake = false;
     
     
     // Start is called before the first frame update
@@ -17,6 +19,7 @@ public class ClickFreeze : MonoBehaviour
     {
         platform = gameObject;
         platform.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -39,14 +42,16 @@ public class ClickFreeze : MonoBehaviour
        if(platform.GetComponentInChildren<Clickable>().clickOn)
         {
             frozen = true;
+            animator.SetBool("isFrozen", true);
             //GameState.UseCharge();
-            platform.GetComponentInParent<SpriteRenderer>().sprite = sprite2;
+            // platform.GetComponentInParent<SpriteRenderer>().sprite = sprite2;
         }
        else
         {
             frozen = false;
+            animator.SetBool("isFrozen", false);
             //GameState.AddCharge();
-            platform.GetComponentInParent<SpriteRenderer>().sprite = sprite1;
+            // platform.GetComponentInParent<SpriteRenderer>().sprite = sprite1;
         }
        
        
@@ -60,6 +65,8 @@ public class ClickFreeze : MonoBehaviour
     }
     IEnumerator falling()
     {
+        startShake = true;
+        animator.SetBool("isShaking", true);
         yield return new WaitForSeconds(timeTillFall);
         floating = false;
         platform.GetComponent<Rigidbody2D>().WakeUp();

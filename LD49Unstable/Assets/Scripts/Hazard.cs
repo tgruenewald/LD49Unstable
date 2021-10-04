@@ -19,7 +19,7 @@ public class Hazard : MonoBehaviour
     }
     IEnumerator death(GameObject go)
     {
-        go.GetComponent<PlaceholderChar>().die();
+        go.GetComponent<Movement2>().die();
         yield return new WaitForSeconds(1f);
         GameState.gameOver();
         dying = false;
