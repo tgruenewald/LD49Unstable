@@ -44,14 +44,14 @@ public class ClickFreeze : MonoBehaviour
             animator.SetBool("isShaking", false);
             animator.SetBool("isFrozen", true);
             //GameState.UseCharge();
-            platform.GetComponentInParent<SpriteRenderer>().sprite = sprite2;
+            // platform.GetComponentInParent<SpriteRenderer>().sprite = sprite2;
         }
        else
         {
             frozen = false;
             animator.SetBool("isFrozen", false);
             //GameState.AddCharge();
-            platform.GetComponentInParent<SpriteRenderer>().sprite = sprite1;
+            // platform.GetComponentInParent<SpriteRenderer>().sprite = sprite1;
         }
        
        
