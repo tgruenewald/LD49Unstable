@@ -19,8 +19,7 @@ public class Hazard : MonoBehaviour
     }
     IEnumerator death(GameObject go)
     {
-        go.GetComponent<Movement2>().die();
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         GameState.gameOver();
         dying = false;
     }
@@ -31,6 +30,7 @@ public class Hazard : MonoBehaviour
         {   
             if (!dying)
             {
+                col.gameObject.GetComponent<Movement2>().die();
                 dying = true;
                 StartCoroutine(death(col.gameObject));
             }
