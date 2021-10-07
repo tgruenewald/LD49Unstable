@@ -23,6 +23,7 @@ public class Movement2 : MonoBehaviour
     Animator animator;
     private bool facingRight = true;
     float lastXPosition = 0f;
+    bool isDying = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +38,10 @@ public class Movement2 : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (isDying)
+        {
+            return;
+        }
         //print(""+Time.deltaTime);
         grounded = groundCheck.IsTouchingLayers(whatIsGround);
         /*Code to maybe make the 'grounded' thing work better:
@@ -210,6 +215,8 @@ public class Movement2 : MonoBehaviour
     public void die()
     {
         Debug.Log("is dying");
+        isDying = true;
+        // rb.isKinematic = true;
         animator.SetBool("isDying", true);
     }
 
